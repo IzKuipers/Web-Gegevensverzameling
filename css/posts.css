@@ -2,8 +2,10 @@ div.post-lijst {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 700px;
-  max-width: 80vw;
+  /* width: 700px; */
+  /* max-width: 80vw; */
+  margin: 0 auto;
+  width: fit-content;
 }
 
 div.post-lijst div.post div.post-content > div.right {
@@ -157,7 +159,7 @@ div.post-lijst div.actions a.delete-button span.material-icons-round {
 }
 
 div.post-lijst p.geen {
-  margin: 20px auto;
+  margin: 40px auto;
   width: fit-content;
   display: flex;
   align-items: start;

@@ -248,6 +248,21 @@ function genereerPostHtml($post, $gebruiker, $isReactie = false)
       </a>
       HTML : "";
 
+  $acties = $gebruiker["naam"] == "" ? "" : <<<HTML
+      <!-- De knop om een post te "liken" -->
+      <a href="/like.php?id=$id" class="like-button">
+        <span class='material-icons-round'>favorite_outline</span>
+        $aantal_likes
+      </a>
+      <!-- De knop om te reageren op een post -->
+      <a href="javascript:reactieFormulier('reactieForm_$id')">
+        <span class="material-icons-round">chat_bubble_outline</span>
+      </a>
+      <!-- De verwijder knop. Deze variabele is een lege string ("") als de post niet van de ingelogde gebruiker is -->
+      $verwijderKnop
+    
+  HTML;
+
   $reactieForm = reactieFormulier($post); // Het reactie-formulier van de post
 
   $classNaam = "post " . ($isReactie ? "reactie" : ""); // De class van de post
@@ -271,18 +286,7 @@ function genereerPostHtml($post, $gebruiker, $isReactie = false)
           <div class="body">$body</div>
           <!-- Boven de content: De auteur's naam + de ID van de post -->
           <div class="actions">
-            <!-- De knop om een post te "liken" -->
-            <a href="/like.php?id=$id" class="like-button">
-              <span class='material-icons-round'>favorite_outline</span>
-              $aantal_likes
-            </a>
-            <!-- De knop om te reageren op een post -->
-            <a href="javascript:reactieFormulier('reactieForm_$id')">
-              <span class="material-icons-round">chat_bubble_outline</span>
-            </a>
-            <!-- De verwijder knop. Deze variabele is een lege string ("") als de post niet van de ingelogde gebruiker is -->
-            $verwijderKnop
-            
+            $acties
             <!-- De geformatteerde datum en tijd van de post -->
             <div class="timestamp">
               $timestamp

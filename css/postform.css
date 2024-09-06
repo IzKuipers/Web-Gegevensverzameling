@@ -6,6 +6,7 @@ form.post-form {
   width: 700px;
   max-width: 80vw;
   padding: 0 15px;
+  margin: 0 auto;
   padding-bottom: 15px;
   margin-bottom: 20px;
   border-bottom: #ddd 1px solid;
