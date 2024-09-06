@@ -1,0 +1,184 @@
+div.post-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 700px;
+  max-width: 80vw;
+}
+
+div.post-lijst div.post div.post-content > div.right {
+  flex-grow: 1;
+  max-width: calc(100% - 58px);
+}
+
+div.post-lijst div.post {
+  display: flex;
+  flex-direction: column;
+  border-bottom: #ddd 1px solid;
+  padding: 0;
+  padding-bottom: 5px;
+  width: 698px;
+  max-width: 80vw;
+}
+
+div.post-lijst div.post-content {
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+div.post-lijst div.post:not(.reactie):has(div.post-reacties) {
+  position: relative;
+}
+
+div.post-lijst div.post div.post-reacties {
+  padding-left: 15px;
+}
+/* 
+div.post-lijst div.post:not(.reactie):has(div.post-reacties)::before {
+  content: "";
+  position: absolute;
+  left: 43px;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #ddd;
+  z-index: 0;
+}
+ */
+div.post-lijst div.post.reactie {
+  margin-top: 10px;
+  width: 100%;
+  border-bottom: none;
+}
+
+div.post-lijst div.post form.reactie-form {
+  margin-left: 58px;
+  width: calc(100% - 58px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+div.post-lijst div.post form.reactie-form:not(.zichtbaar) {
+  display: none;
+}
+
+div.post-lijst div.post form.reactie-form input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: #ddd 1px solid;
+  border-radius: 10px;
+  height: 35px;
+}
+
+div.post-lijst div.post form.reactie-form input[type="submit"] {
+  display: block;
+  height: 35px;
+  background-color: #fff;
+  padding: 0 18px;
+  border-radius: 20px;
+  border: #ddd 1px solid;
+  font-weight: bold;
+  line-height: 35px;
+}
+
+div.post-lijst div.post form.reactie-form input[type="submit"]:hover {
+  background-color: rgb(92, 214, 255);
+  color: #fff;
+  border: transparent 1px solid;
+}
+
+div.post-lijst div.post form.reactie-form input[type="submit"]:active {
+  background-color: rgb(0, 165, 220);
+  color: #fff;
+  border: transparent 1px solid;
+}
+div.post-lijst div.post:not(.reactie) {
+  padding: 0 20px;
+}
+
+div.post-lijst div.post:last-child {
+  border-bottom: none;
+}
+
+div.post-lijst div.post img {
+  height: 48px;
+  border-radius: 50%;
+}
+
+div.post-lijst div.post div.auteur {
+  font-weight: bold;
+}
+
+div.post-lijst div.post div.auteur span.id {
+  font-weight: normal;
+  opacity: 0.5;
+}
+
+div.post-lijst div.post div.body {
+  word-wrap: break-word;
+  hyphens: auto;
+  max-width: 500px;
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+
+div.post-lijst div.actions {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding: 10px 0;
+}
+
+div.post-lijst div.actions div.timestamp {
+  opacity: 0.3;
+  margin-left: auto;
+}
+
+div.post-lijst div.actions a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+div.post-lijst div.actions a span.material-icons-round {
+  font-size: 20px;
+}
+
+div.post-lijst div.actions a.like-button span.material-icons-round {
+  color: tomato;
+}
+
+div.post-lijst div.actions a.delete-button span.material-icons-round {
+  color: deepskyblue;
+}
+
+div.post-lijst p.geen {
+  margin: 20px auto;
+  width: fit-content;
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  max-width: 75%;
+}
+
+div.post-lijst p.geen span.material-icons-round {
+  color: orange;
+}
+
+div.post-lijst p.geen span.bericht {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 500px) {
+  div.post-lijst div.actions a.delete-button span:not(.material-icons-round) {
+    display: none;
+  }
+
+  div.post-lijst div.post {
+    max-width: 100vw;
+  }
+}

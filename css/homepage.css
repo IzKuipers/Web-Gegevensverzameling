@@ -1,0 +1,26 @@
+@import url("./base.css");
+@import url("./hero.css");
+
+body {
+  overflow-y: scroll;
+}
+
+main {
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 700px;
+  border: #ddd 1px solid;
+  margin-top: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 700px) {
+  main {
+    margin-top: 0;
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+}
