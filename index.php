@@ -1,9 +1,9 @@
 <?php
-require_once ("./util/session.php");
-require_once ("./util/error.php");
-require_once ("./util/posts.php");
-require_once ("./ui/headerbar.php");
-require_once ("./ui/hero.php");
+require_once("./util/session.php");
+require_once("./util/error.php");
+require_once("./util/posts.php");
+require_once("./ui/headerbar.php");
+require_once("./ui/hero.php");
 
 require_once "./vendor/autoload.php";
 
@@ -32,7 +32,7 @@ $gebruiker = gebruikerUitSessie(); // Haal de gebruiker uit de session (voor de 
     <!-- Het formulier voor het versturen van een post. Hij gebruikt de POST methode en
          stuurt door naar /stuurpost.php, waar de logica voor het sturen van de post leeft. -->
     <?php if ($gebruiker["naam"]) {
-    echo <<<HTML
+      echo <<<HTML
       <form action="/stuurpost.php" method="POST" class="post-form">
         <!-- De textarea waar de gebruiker hun bericht in kan typen -->
         <textarea class="" placeholder="Wat gebeurt er?!" name="bericht" required maxlength="512" rows="3"></textarea>
@@ -42,7 +42,7 @@ $gebruiker = gebruikerUitSessie(); // Haal de gebruiker uit de session (voor de 
     HTML;
     } else {
       Hero();
-    }?>
+    } ?>
     <!-- De functie die de tweets weergeeft-->
     <?php postLijst(postsOphalen()) ?>
   </main>

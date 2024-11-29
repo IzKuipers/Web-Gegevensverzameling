@@ -1,10 +1,11 @@
 <?php
-require_once ("connectie.php");
-require_once ("toast.php");
+require_once("connectie.php");
+require_once("session.php");
+require_once("toast.php");
 
 function foutmelding(Foutmeldingen $id, string $vervolg = "", string $bericht = "")
 {
-  session_start(); // Start de sessie voor fout_details
+  probeerSessionStart(); // Start de sessie voor fout_details
 
   $aanvraagUri = $_SERVER["REQUEST_URI"]; // Dit is de Uniform Resource Identifier, in feiten gewoon de URL van de pagina, inclusief de GET parameters en Hash
   $huidigeUrl = parse_url($aanvraagUri); // Verkrijg de individuele onderdelen van de URI in vorm van een associative array (URL pad als "path" en de GET parameters als "query")
@@ -24,7 +25,7 @@ function foutmelding(Foutmeldingen $id, string $vervolg = "", string $bericht = 
 // Dankzij deze functie kan er op iedere pagina op dezelfde manier een foutmelding worden weergegeven.
 function geefFoutmeldingWeer()
 {
-  session_start(); // Start de sessie voor fout_details
+  probeerSessionStart(); // Start de sessie voor fout_details
   geefToastWeer(); // laat een eventuele toast zien als deze er is
 
   // Als er geen foutmelding is, doe dan ook niks.

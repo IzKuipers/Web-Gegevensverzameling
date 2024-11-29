@@ -1,6 +1,7 @@
 <?php
 
 require_once("gebruiker.php");
+require_once("session.php");
 
 use Dompdf\Dompdf;
 
@@ -126,9 +127,7 @@ function postsVanGebruiker($id)
 }
 function postsExporteren($posts)
 {
-  if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-  }
+  probeerSessionStart();
 
   $gebruiker = gebruikerUitSessie();
 
@@ -229,7 +228,7 @@ function postsExporteren($posts)
 // Deze functie geeft de daadwerkelijke posts weer in de HTML
 function postLijst($posts, $geenReacties = false)
 {
-  session_start(); // Start de sessie voor de ingelogde gebruiker's eigenschappen
+  probeerSessionStart(); // Start de sessie voor de ingelogde gebruiker's eigenschappen
 
   $gebruiker = gebruikerUitSessie(); // Verkrijg de gebruiker uit de informatie die bij het inloggen is opgeslagen in de session
 

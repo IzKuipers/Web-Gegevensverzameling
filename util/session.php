@@ -4,7 +4,7 @@
 // gebruiker is ingelogd, en stuurt de gebruiker terug naar de inlogpagina als dat niet zo is.
 function verifieerIngelogd()
 {
-  session_start(); // Start de sessie
+  probeerSessionStart(); // Start de sessie
 
   // Check of de gebruiker in de sessie staat
   if (!isset($_SESSION["gebruiker"])) {
@@ -36,9 +36,16 @@ function gebruikerUitSessie()
 // Deze functie is gebruikt om de gebruiker uit te loggen.
 function uitloggen()
 {
-  session_start(); // Start de sessie
+  probeerSessionStart(); // Start de sessie
 
   unset($_SESSION["gebruiker"]); // Haal de gebruiker uit de session
   $_SESSION["toast"] = 6;
   header("location:/index.php"); // Stuur de gebruiker door naar het login scherm
+}
+
+function probeerSessionStart()
+{
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
 }

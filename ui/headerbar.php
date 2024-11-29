@@ -13,6 +13,7 @@ function HeaderBar($gebruiker)
       <img src="/images/logo.png" alt="">
       <h1><a href="/">Twitter<span class="sub">(PHP)</span></a></h1>
     </div>
+    <a href="/export.php">Posts exporteren</a>
     <!-- Aan de rechter kant: De gebruikersnaam met een knop om uit te loggen-->
     <div class="right">
   HTML;
