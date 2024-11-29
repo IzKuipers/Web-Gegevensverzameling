@@ -5,8 +5,9 @@ require_once ("./util/posts.php");
 require_once ("./ui/headerbar.php");
 require_once ("./ui/hero.php");
 
-// verifieerIngelogd(); // Check of de gebruiker is ingelogd
-geefFoutmeldingWeer(); // Geef een potentiele foutmelding weer
+require_once "./vendor/autoload.php";
+
+geefFoutmeldingWeer(); // Geef een potentiele foutmelding weer  
 
 $gebruiker = gebruikerUitSessie(); // Haal de gebruiker uit de session (voor de header van de pagina)
 ?>

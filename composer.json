@@ -1,0 +1,17 @@
+{
+    "name": "izaak/web-gegevensverzameling",
+    "autoload": {
+        "psr-4": {
+            "Izaak\\WebGegevensverzameling\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Izaak Kuipers",
+            "email": "izaak.kuipers@gmail.com"
+        }
+    ],
+    "require": {
+        "dompdf/dompdf": "^3.0"
+    }
+}

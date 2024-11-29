@@ -1,6 +1,10 @@
 <?php
 
-require_once ("gebruiker.php");
+require_once("gebruiker.php");
+
+use Dompdf\Dompdf;
+
+
 
 // Deze functie geeft een lijst terug met alle posts. Het voegt ook de eigenschappen van
 // iedere auteur toe aan iedere tweet om het makkelijker te maken voor de HTML implementatie
@@ -119,9 +123,108 @@ function postsVanGebruiker($id)
     // Probeer de connectie en statement te sluiten
     sluitMysqli($connectie, $statement);
   }
-
-  return array();
 }
+function postsExporteren($posts)
+{
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+
+  $gebruiker = gebruikerUitSessie();
+
+  // Start the HTML with inline styles for Twitter-like light mode
+  $html = <<<HTML
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #0f1419; /* Dark text */
+            background-color: #ffffff; /* Light background */
+            margin: 0;
+            padding: 0;
+        }
+        .post-lijst {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .post {
+            border: 1px solid #e1e8ed; /* Light gray border */
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #ffffff; /* White card background */
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .auteur {
+            font-weight: bold;
+            font-size: 14px;
+            color: #1d9bf0; /* Twitter blue for author name */
+            margin-bottom: 5px;
+        }
+        .body {
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 10px 0;
+            color: #0f1419; /* Primary text color */
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #657786; /* Muted text color */
+        }
+    </style>
+    <div class='post-lijst'>
+    HTML;
+
+  // Build the posts
+  if (count($posts) == 0) {
+    $html .= <<<HTML
+          <p style="text-align: center; color: #657786; font-size: 14px;">
+            Hier zijn geen tweets! Wat een leegte...
+          </p>
+        HTML;
+  } else {
+    foreach ($posts as $post) {
+      // Escape all dynamic content
+      $body = htmlspecialchars($post['body']);
+      $datumtijd = date("j M - G:i", strtotime($post["timestamp"]));
+      $postVanGebruiker = $gebruiker["id"] == $post["auteur"]["idGebruiker"];
+      $gebruikersnaam = htmlspecialchars($post['auteur']['naam']) . ($postVanGebruiker ? " (jij)" : "");
+
+      // Add each post with styling
+      $html .= <<<HTML
+              <div class='post'>
+                <div class="auteur">
+                  $gebruikersnaam
+                </div>  
+                <div class="body">$body</div>
+                <div class="timestamp">
+                  $datumtijd
+                </div>
+              </div>
+            HTML;
+    }
+  }
+
+  $html .= "</div>"; // Close the post list
+
+  // Initialize Dompdf
+  $dompdf = new Dompdf();
+  $dompdf->loadHtml($html);
+
+  // Set paper size
+  $dompdf->setPaper("A4", "portrait");
+
+  // Render PDF
+  $dompdf->render();
+
+  // Ensure no extra output corrupts the PDF
+  ob_end_clean();
+
+  // Stream the PDF to the browser
+  $dompdf->stream("export.pdf", ["Attachment" => 0]); // Set to 1 for forced download
+}
+
 
 // Deze functie geeft de daadwerkelijke posts weer in de HTML
 function postLijst($posts, $geenReacties = false)
